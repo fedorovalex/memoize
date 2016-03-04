@@ -30,7 +30,8 @@ describe("Memoized function", function () {
 	});
 
 	it("should not be equal to the original function", function () {
-		expect(memoize(abs)).to.not.equal(abs);
+		expect(memoize(abs)).to.exist
+				.and.to.not.equal(abs);
 	});
 
 	it("should delegate calls to target function", function () {
@@ -75,6 +76,6 @@ describe("Memoized function", function () {
 	it("should use complicated enough key generator to preserve argument's order", function () {
 		expect(memoizedAbs(4, 3)).to.equal(5);
 		expect(memoizedAbs(3, 4)).to.equal(5);
-		expect(grepSpy).to.have.been.called.twice();
+		expect(absSpy).to.have.been.called.twice();
 	});
 });
