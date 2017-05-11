@@ -1,9 +1,10 @@
 export { memoize };
 
 function memoize(func) {
-    var cash = {};
+    const cash = {};
     return function (...arg) {
-        var key = identifyKey(arg), result;
+        const key = identifyKey(arg);
+        let result;
         if (key in cash) {
             result = cash[key];
         } else {
@@ -13,10 +14,4 @@ function memoize(func) {
     }
 }
 
-var identifyKey = function (arg) {
-    var key = "";
-    arg.forEach(function (elem) {
-                            key += "[" + Object.prototype.toString.call(elem).slice(8, -1) + " - " + elem + "], ";
-                        });
-    return key;
-};
+const identifyKey = (args) => args.reduce((key, arg) => `${key}[${typeof arg} - ${arg}], `, "!");
